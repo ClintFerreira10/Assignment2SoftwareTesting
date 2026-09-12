@@ -4,7 +4,6 @@
 import java.util.*;
 import java.io.*;
 
-
 class Account implements Serializable
 {
 	String name;
