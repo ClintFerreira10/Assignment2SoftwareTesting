@@ -1,7 +1,21 @@
 import org.junit.jupiter.api.Test;
 import java.io.*;
-
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import static org.junit.jupiter.api.Assertions.*;
+
+
+
+@SpiraTestConfiguration (
+//following are REQUIRED
+        url = "https://rmit.spiraservice.net/",
+        login = "s4139703",
+        rssToken = "{6930BCF7-B0E9-4AF7-9C6F-CCB604BE96AA}",
+        projectId = 1047
+//following are OPTIONAL
+        // releaseId = 7,
+        // testSetId
+)
 
 // Tests for the Account class.
 // Account mostly only has getters and setters
@@ -11,7 +25,8 @@ class AccountTest {
     double delta = 0.001; // Small delta number for testing
 
     @Test
-    void defaultConstructorGivesEmptyAccount() {
+    @SpiraTestCase(testCaseId = 50676)
+   public void defaultConstructorGivesEmptyAccount() {
         Account a = new Account();
         assertNull(a.getName());
         assertEquals(0, a.getAccountNumber());

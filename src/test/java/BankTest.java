@@ -1,10 +1,25 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.*;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
+import static org.junit.jupiter.api.Assertions.*;
+
+
+
+@SpiraTestConfiguration (
+//following are REQUIRED
+        url = "https://rmit.spiraservice.net/",
+        login = "s4139703",
+        rssToken = "{6930BCF7-B0E9-4AF7-9C6F-CCB604BE96AA}",
+        projectId = 1047
+//following are OPTIONAL
+        // releaseId = 7,
+        // testSetId
+)
 
 class BankTest {
 
