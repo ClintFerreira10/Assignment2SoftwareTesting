@@ -26,7 +26,7 @@ class AccountTest {
 
     @Test
     @SpiraTestCase(testCaseId = 50676)
-   public void defaultConstructorGivesEmptyAccount() {
+    public void defaultConstructorGivesEmptyAccount() {
         Account a = new Account();
         assertNull(a.getName());
         assertEquals(0, a.getAccountNumber());
@@ -35,14 +35,16 @@ class AccountTest {
     }
 
     @Test
-    void constructorAddsDefaultThousand() {     //Testing default add 1000
+    @SpiraTestCase(testCaseId = 50795)
+    public void constructorAddsDefaultThousand() {     //Testing default add 1000
         Account a = new Account("Sam", 12345678, "1234", 500);
         assertEquals(1500, a.getAmount(), delta);
     }
 
 
     @Test
-    void constructorSetsTheOtherFieldsToo() {   // Testing other Fields
+    @SpiraTestCase(testCaseId = 50796)
+    public void constructorSetsTheOtherFieldsToo() {   // Testing other Fields
         Account a = new Account("Sam", 12345678, "1234", 500);
 
         assertAll(
@@ -55,27 +57,31 @@ class AccountTest {
 
     // the menu tells you to type 0 if you do not want to deposit any amount
     @Test
-    void zeroDepositStillGets1000() {
+    @SpiraTestCase(testCaseId = 50797)
+    public void zeroDepositStillGets1000() {
         Account a = new Account("Ana", 87654321, "0000", 0);
         assertEquals(1000, a.getAmount(), delta);
     }
 
     // A negative number deposit
     @Test
-    void negativeDepositIsAllowed() {
+    @SpiraTestCase(testCaseId = 50799)
+    public void negativeDepositIsAllowed() {
         Account a = new Account("Ravi", 11112222, "9999", -250);
         assertEquals(750, a.getAmount(), delta);
     }
 
     // boundary condition + 1000 -1000
     @Test
-    void depositOfMinus1000LeavesZero() {
+    @SpiraTestCase(testCaseId = 50800)
+    public void depositOfMinus1000LeavesZero() {
         Account a = new Account("Mia", 33334444, "4321", -1000);
         assertEquals(0, a.getAmount(), delta);
     }
 
     @Test // checking for empty name and pin
-    void nullNameAndPinAreAccepted() {
+    @SpiraTestCase(testCaseId = 50802)
+    public void nullNameAndPinAreAccepted() {
         Account a = new Account(null, 0, null, 100);
 
         assertNull(a.getName());
@@ -84,7 +90,8 @@ class AccountTest {
     }
 
     @Test // Checking  Setters
-    void settersWork() {
+    @SpiraTestCase(testCaseId = 50803)
+    public void settersWork() {
         Account a = new Account();
         a.setName("Ana");
         a.setAccountNumber(87654321);
@@ -98,7 +105,8 @@ class AccountTest {
     }
 
     @Test // checking if setters overwrite after being set by constructor
-    void settersOverwriteWhatTheConstructorSet() {
+    @SpiraTestCase(testCaseId = 50804)
+    public void settersOverwriteWhatTheConstructorSet() {
         Account a = new Account("Sam", 12345678, "1234", 500);
         a.setName("Samantha");
         a.setAccountNumber(99998888);
@@ -113,14 +121,16 @@ class AccountTest {
     }
 
     @Test // Check amount setter for negative
-    void setAmountLetsYouGoNegative() {
+    @SpiraTestCase(testCaseId = 50805)
+    public void setAmountLetsYouGoNegative() {
         Account a = new Account();
         a.setAmount(-50);
         assertEquals(-50, a.getAmount(), delta);
     }
 
     @Test // checking if decimals work on amount
-    void amountKeepsDecimals() {
+    @SpiraTestCase(testCaseId = 50807)
+    public void amountKeepsDecimals() {
         Account a = new Account();
         a.setAmount(1234.56);
         assertEquals(1234.56, a.getAmount(), delta);
@@ -130,7 +140,8 @@ class AccountTest {
 
     // As bank.save() is writing all objects as a file, checking if serialisable
     @Test
-    void accountCanBeSerialised() throws Exception {
+    @SpiraTestCase(testCaseId = 50808)
+    public void accountCanBeSerialised() throws Exception {
         Account original = new Account("Sam", 12345678, "1234", 500);
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();

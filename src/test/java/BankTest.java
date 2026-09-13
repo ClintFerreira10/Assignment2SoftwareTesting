@@ -74,7 +74,8 @@ class BankTest {
     /////////////addNewRecord Function////////////////////
 
     @Test
-    void addNewRecordReadsAllFourPrompts() {
+    @SpiraTestCase(testCaseId = 50905)
+    public void addNewRecordReadsAllFourPrompts() {
         addAccount("Clint Ferreira", "12345678", "1234", "500");
 
         Account a = bank.AL.get(0);
@@ -86,13 +87,15 @@ class BankTest {
     }
 
     @Test
-    void addNewRecordWithZeroDeposit() { // adding empty deposit account
+    @SpiraTestCase(testCaseId = 50907)
+    public void addNewRecordWithZeroDeposit() { // adding empty deposit account
         addAccount("Niku", "87654321", "0000", "0");
         assertEquals(1000, bank.AL.get(0).getAmount(), delta);
     }
 
     @Test
-    void canAddMoreThanOneAccount() {
+    @SpiraTestCase(testCaseId = 50909)
+    public void canAddMoreThanOneAccount() {
         addAccount("Nikita", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "100");
 
@@ -104,7 +107,8 @@ class BankTest {
 
     // checking long name with spaces
     @Test
-    void nameWithSpacesIsNotCutOff() {
+    @SpiraTestCase(testCaseId = 50911)
+    public void nameWithSpacesIsNotCutOff() {
         addAccount("Mary Jane Watson", "13571357", "8080", "25");
         assertEquals("Mary Jane Watson", bank.AL.get(0).getName());
     }
@@ -112,7 +116,8 @@ class BankTest {
     //////////transfer Function//////////////
 
     @Test
-    void transferMovesTheMoney() {
+    @SpiraTestCase(testCaseId = 50914)
+    public void transferMovesTheMoney() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -127,7 +132,8 @@ class BankTest {
 
     // Checking full amount transfer
     @Test
-    void canTransferTheWholeBalance() {
+    @SpiraTestCase(testCaseId = 50916)
+    public void canTransferTheWholeBalance() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -140,7 +146,8 @@ class BankTest {
 
     // and 1 over full amount which should be rejected
     @Test
-    void transferMoreThanBalanceIsRejected() {
+    @SpiraTestCase(testCaseId = 50921)
+    public void transferMoreThanBalanceIsRejected() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -153,7 +160,8 @@ class BankTest {
     }
 
     @Test
-    void transferWithUnknownSenderAccount() { // transfer from random account, which should be stopped
+    @SpiraTestCase(testCaseId = 50923)
+    public void transferWithUnknownSenderAccount() { // transfer from random account, which should be stopped
         addAccount("Sam", "11111111", "1111", "0");
 
         feed("99999999\n1111\n11111111\n50\n");
@@ -165,7 +173,8 @@ class BankTest {
 
     // account number is right, pin is wrong.
     @Test
-    void transferWithWrongSenderPin() {
+    @SpiraTestCase(testCaseId = 50926)
+    public void transferWithWrongSenderPin() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -178,7 +187,8 @@ class BankTest {
     }
 
     @Test
-    void transferWithUnknownReceiver() {    // transfer to random account, which should be stopped
+    @SpiraTestCase(testCaseId = 50927)
+    public void transferWithUnknownReceiver() {    // transfer to random account, which should be stopped
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -191,7 +201,8 @@ class BankTest {
 
     // Self transfer. Nothing should change
     @Test
-    void transferToYourselfChangesNothing() {
+    @SpiraTestCase(testCaseId = 50928)
+    public void transferToYourselfChangesNothing() {
         addAccount("Sam", "11111111", "1111", "0");
 
         feed("11111111\n1111\n11111111\n400\n");
@@ -201,7 +212,8 @@ class BankTest {
     }
 
     @Test ///  transfer when no accounts created
-    void transferWhenThereAreNoAccountsAtAll() {
+    @SpiraTestCase(testCaseId = 50941)
+    public void transferWhenThereAreNoAccountsAtAll() {
         feed("11111111\n1111\n22222222\n50\n");
         bank.transfer();
 
@@ -212,7 +224,8 @@ class BankTest {
     /////////////////////////////  withdraw function  //////////////////////////
 
     @Test // Basic Check
-    void withdrawTakesTheMoneyOut() {
+    @SpiraTestCase(testCaseId = 50954)
+    public void withdrawTakesTheMoneyOut() {
         addAccount("Sam", "11111111", "1111", "500");
 
         feed("11111111\n1111\n200\n");
@@ -222,7 +235,8 @@ class BankTest {
     }
 
     @Test // Full Balance Withdraw
-    void canWithdrawEverything() {
+    @SpiraTestCase(testCaseId = 50958)
+    public void canWithdrawEverything() {
         addAccount("Sam", "11111111", "1111", "0");
 
         feed("11111111\n1111\n1000\n");
@@ -232,7 +246,8 @@ class BankTest {
     }
 
     @Test // Trying to over withdraw
-    void withdrawMoreThanBalanceIsRejected() {
+    @SpiraTestCase(testCaseId = 50962)
+    public void withdrawMoreThanBalanceIsRejected() {
         addAccount("Sam", "11111111", "1111", "0");
 
         feed("11111111\n1111\n1001\n");
@@ -243,7 +258,8 @@ class BankTest {
     }
 
     @Test // Witthdraw with invalid account No
-    void withdrawWithUnknownAccount() {
+    @SpiraTestCase(testCaseId = 50966)
+    public void withdrawWithUnknownAccount() {
         addAccount("Sam", "11111111", "1111", "0");
 
         feed("99999999\n1111\n50\n");
@@ -254,7 +270,8 @@ class BankTest {
     }
 
     @Test // check wrong pin
-    void withdrawWithWrongPin() {
+    @SpiraTestCase(testCaseId = 50969)
+    public void withdrawWithWrongPin() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "0");
 
@@ -266,7 +283,8 @@ class BankTest {
     }
 
     @Test // Withdraw without account
-    void withdrawWhenBankIsEmpty() {
+    @SpiraTestCase(testCaseId = 50972)
+    public void withdrawWhenBankIsEmpty() {
         feed("11111111\n1111\n50\n");
         bank.withdraw();
         assertTrue(output().contains("Account not Found"));
@@ -275,7 +293,8 @@ class BankTest {
     /////////////////// print Function ///////////////////////////
 
     @Test
-    void printShowsEveryAccount() { // Print all
+    @SpiraTestCase(testCaseId = 50975)
+    public void printShowsEveryAccount() { // Print all
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "250");
 
@@ -291,7 +310,8 @@ class BankTest {
     }
 
     @Test // Print Without accounts
-    void printWithNoAccounts() {
+    @SpiraTestCase(testCaseId = 50978)
+    public void printWithNoAccounts() {
         bank.print();
         assertFalse(output().contains("Account Number:"));
     }
@@ -299,7 +319,8 @@ class BankTest {
     ////////// save / load function ////////////////
 
     @Test   // Check accounts after save and load
-    void saveThenLoadGivesBackTheSameAccounts() {
+    @SpiraTestCase(testCaseId = 50984)
+    public void saveThenLoadGivesBackTheSameAccounts() {
         addAccount("Sam", "11111111", "1111", "0");
         addAccount("Ana", "22222222", "2222", "500");
         bank.save();
@@ -318,7 +339,8 @@ class BankTest {
     }
 
     @Test // Try Save an empty bank
-    void savingAnEmptyBankStillMakesAFile() {
+    @SpiraTestCase(testCaseId = 50985)
+    public void savingAnEmptyBankStillMakesAFile() {
         bank.save();
 
         Bank b2 = new Bank();
@@ -331,7 +353,8 @@ class BankTest {
 
     // load  function has an empty catch block so a missing file just gives an empty bank
     @Test
-    void loadWithNoFileThere() {
+    @SpiraTestCase(testCaseId = 50986)
+    public void loadWithNoFileThere() {
         assertFalse(recordFile.exists());
 
         bank.load();
@@ -342,7 +365,8 @@ class BankTest {
 
     // load stops after null is found
     @Test
-    void loadStopsWhenItHitsANull() throws Exception {
+    @SpiraTestCase(testCaseId = 50987)
+    public void loadStopsWhenItHitsANull() throws Exception {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(recordFile));
         oos.writeObject(new Account("Sam", 11111111, "1111", 0));
         oos.writeObject(null);
@@ -356,7 +380,8 @@ class BankTest {
     }
 
     @Test // check load on non serialised data
-    void loadDoesNotCrashOnAJunkFile() throws Exception {
+    @SpiraTestCase(testCaseId = 50988)
+    public void loadDoesNotCrashOnAJunkFile() throws Exception {
         FileOutputStream fos = new FileOutputStream(recordFile);
         fos.write("this is not serialised data. Just junk file".getBytes());
         fos.close();
@@ -367,7 +392,8 @@ class BankTest {
 
     // load adds to the list instead of clearing it first, so calling it twice duplicates everything.
     @Test
-    void loadAppendsAndDoesNotReplace() {
+    @SpiraTestCase(testCaseId = 50989)
+    public void loadAppendsAndDoesNotReplace() {
         addAccount("Sam", "11111111", "1111", "0");
         bank.save();
 
@@ -379,7 +405,8 @@ class BankTest {
 
 
     @Test
-    void saveReportsAnErrorWhenItCannotWriteTheFile() {
+    @SpiraTestCase(testCaseId = 50990)
+    public void saveReportsAnErrorWhenItCannotWriteTheFile() {
         addAccount("Sam", "11111111", "1111", "0");
         deleteRecordFile();
 
